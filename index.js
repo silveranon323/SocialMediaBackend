@@ -1,14 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
+import router from "./routes/user-routes.js";
 const app = express();
-mongoose.connect()
-app.use("/api", (req, res, next) => {
-  res.send("Hello world");
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello user");
-});
-app.listen(4000, () => {
-  "Server is successfully started";
-});
+app.use("/api/user", router);
+mongoose
+  .connect("mongodb://localhost:27017")
+  .then(app.listen(4000))
+  .then(console.log("Connected to the database and listening on 4000"));
