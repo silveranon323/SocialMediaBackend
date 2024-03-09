@@ -17,16 +17,16 @@ export const signup = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ email });
   } catch (err) {
-    console.log(err);
+    return console.log(err);
   }
   if (existingUser) {
     return res.status(400).json({ message: "User already exists." });
   }
   const user = new User({ name, email, password });
   try {
-   await user.save();
+    await user.save();
   } catch (error) {
-    console.log(error);
+    return console.log(error);
   }
-  return res.status(201).json({user})
+  return res.status(201).json({ user });
 };
